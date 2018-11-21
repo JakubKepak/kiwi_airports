@@ -25,5 +25,6 @@ class GetUkAirports:
 
         response = requests.request("GET", self.locations_endpoint, headers=self.headers, params=querystring)
 
+        # TODO properly filter IATA codes
         for i in range(70):
             print(response.json()['locations'][i]['id'])
