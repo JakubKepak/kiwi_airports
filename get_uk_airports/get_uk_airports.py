@@ -11,7 +11,7 @@ class GetUkAirports:
     def find_uk_airports(self):
         """
         Get airports in the UK
-        :returns IATA codes of the airports
+        :returns a list of IATA codes of the airports
         """
 
         querystring = {"type": "subentity",
@@ -19,12 +19,14 @@ class GetUkAirports:
                        "locale": "en-US",
                        "active_only": "True",
                        "location_types": "airport",
-                       "limit": "200",
+                       "limit": "2000",
                        "sort": "name"
                       }
 
         response = requests.request("GET", self.locations_endpoint, headers=self.headers, params=querystring)
+        IATA_codes = []
 
-        # TODO properly filter IATA codes
-        for i in range(70):
-            print(response.json()['locations'][i]['id'])
+        for i in range(len(response.json()['locations'])):
+            IATA_codes.append(response.json()['locations'][i]['id'])
+
+        return IATA_codes
