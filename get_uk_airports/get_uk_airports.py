@@ -1,5 +1,4 @@
 import requests
-import json
 
 
 class GetUkAirports:
@@ -8,10 +7,10 @@ class GetUkAirports:
         self.locations_endpoint = "https://api.skypicker.com/locations?"
         self.headers = {"Content-type": "application/json"}
 
-    def find_uk_airports(self):
+    def get_uk_airports(self):
         """
         Get airports in the UK
-        :returns a list of IATA codes of the airports
+        :returns json of UK airports
         """
 
         querystring = {"type": "subentity",
@@ -24,9 +23,33 @@ class GetUkAirports:
                       }
 
         response = requests.request("GET", self.locations_endpoint, headers=self.headers, params=querystring)
-        IATA_codes = []
 
-        for i in range(len(response.json()['locations'])):
-            IATA_codes.append(response.json()['locations'][i]['id'])
+        return response.json()
 
-        return IATA_codes
+    def airport_info(self, data, iata, names, cities, coords):
+
+        """
+        Get information about UK airports from json
+        :returns list of airports
+        """
+        airport_info = []
+        airport_subinfo = []
+
+        for i in range(len(data['locations'])):
+
+            if iata:
+                airport_subinfo.append(data['locations'][i]['id'])
+            if names:
+                airport_subinfo.append(data['locations'][i]['name'])
+            if cities:
+                airport_subinfo.append(data['locations'][i]['city']['name'])
+            if coords:
+                airport_subinfo.append(str(data['locations'][i]['location']['lon']))
+                airport_subinfo.append(str(data['locations'][i]['location']['lat']))
+
+            airport_info.append(airport_subinfo)
+            airport_subinfo = []
+
+        return airport_info
+
+
