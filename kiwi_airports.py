@@ -7,7 +7,7 @@ import click
 @click.option('--names/--no-names', default=True, help="Returns UK airports names")
 @click.option('--cities/--no-cities', default=False, help="Returns UK airport cities")
 @click.option('--coords/--no-coords', default=False, help="Returns UK airport coordinates (long, lat)")
-@click.option('--full/--no-full', default=False, help="Returns UK airport coordinates (long, lat)")
+@click.option('--full/--no-full', default=False, help="Returns All information about airports")
 def runner(iata, names, cities, coords, full):
 
     if full:
