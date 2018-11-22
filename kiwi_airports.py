@@ -27,13 +27,6 @@ def runner(iata, names, cities, coords, full):
         print('\r')
 
 
-
-
-
-
-
-
-
 if __name__ == "__main__":
 
     runner()
