@@ -1,4 +1,5 @@
 import requests
+import sys
 
 
 class GetUkAirports:
@@ -22,9 +23,15 @@ class GetUkAirports:
                        "sort": "name"
                       }
 
-        response = requests.request("GET", self.locations_endpoint, headers=self.headers, params=querystring)
-
-        return response.json()
+        try:
+            response = requests.request("GET", self.locations_endpoint, headers=self.headers, params=querystring)
+            response.raise_for_status()
+            return response.json()
+        except requests.exceptions.HTTPError as http_error:
+            print("Http Error:", http_error)
+        except requests.exceptions.RequestException as request_exception:
+            print('OOOPS something went badly wrong.', request_exception)
+            sys.exit(1)
 
     def airport_info(self, data, iata, names, cities, coords):
 
@@ -44,8 +51,8 @@ class GetUkAirports:
             if cities:
                 airport_subinfo.append(data['locations'][i]['city']['name'])
             if coords:
-                airport_subinfo.append(str(data['locations'][i]['location']['lon']))
-                airport_subinfo.append(str(data['locations'][i]['location']['lat']))
+                airport_subinfo.append(data['locations'][i]['location']['lon'])
+                airport_subinfo.append(data['locations'][i]['location']['lat'])
 
             airport_info.append(airport_subinfo)
             airport_subinfo = []

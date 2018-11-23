@@ -19,11 +19,15 @@ def runner(iata, names, cities, coords, full):
     get_uk_airports = GetUkAirports()
     data = get_uk_airports.get_uk_airports()
 
-    result  = (get_uk_airports.airport_info(data, iata, names, cities, coords))
+    result = (get_uk_airports.airport_info(data, iata, names, cities, coords))
 
     for i in range(len(result)):
         for n in range(len(result[i])):
-            print(result[i][n] + ', ', end=' ')
+            try:
+                print(result[i][n] + ', ', end=' ')
+            except TypeError:
+                print(str(result[i][n]) + ', ', end=' ')
+
         print('\r')
 
 
