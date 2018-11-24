@@ -9,3 +9,4 @@ def test_all_airports_are_in_the_uk(get_data):
 
 
 # TODO write test for all used keys
+# TODO implement tests for exceptions
