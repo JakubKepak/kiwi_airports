@@ -19,7 +19,7 @@ class GetUkAirports:
                     row += list(self.airport_info[i].values())[n] + ', '
                 except TypeError:
                     row += str(list(self.airport_info[i].values())[n]) + ', '
-            row += '\n'
+            row += '\n '
         return row
 
     def get_uk_airports(self):
