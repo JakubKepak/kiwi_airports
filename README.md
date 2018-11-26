@@ -25,6 +25,7 @@ $python kiwi_airports.py
 $python kiwi_airports.py --help
 $python kiwi_airports.py --full
 $python kiwi_airports.py --cities --coords
+```
 
 ##Output
 Output is nested list of dictionaries.
