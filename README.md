@@ -29,4 +29,4 @@ $python kiwi_airports.py --cities --coords
 ```
 
 ## Output
-Output is nested list of dictionaries.
+Output is a list of dictionaries.
